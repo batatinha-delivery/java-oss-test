@@ -4,14 +4,14 @@ include:
     file: pipelines/ifood-backend/main.yml
 
 finish:
-  - stage: cooldown hpa
-    image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
-    variables: 
-      REPOSITORY: batatinha-delivery/test-forks-pr
-      SHA: ${CI_COMMIT_SHA}
-    script:
-      - cd /src
-      - node check_success.js
+  stage: cooldown hpa
+  image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
+  variables: 
+    REPOSITORY: batatinha-delivery/test-forks-pr
+    SHA: ${CI_COMMIT_SHA}
+  script:
+    - cd /src
+    - node check_success.js
 
 unit-tests:
   stage: test
