@@ -6,26 +6,12 @@ include:
     file: pipelines/ifood-backend/main.yml
 
 stages:
-  - rollback
   - pipeline info
   - compliance check
   - test
   - security publish report
   - code analysis
   - build
-  - review deploy
-  - stop review deploy
-  - stop deploy
-  - sandbox deploy
-  - canary start
-  - canary check
-  - deploy
-  - release
-  - canary on branch reject
-  - warmup hpa
-  - redeploy
-  - check hpa
-  - cooldown hpa
   - conclude
 
 finish:
