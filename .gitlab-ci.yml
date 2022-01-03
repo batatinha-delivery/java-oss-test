@@ -1,10 +1,35 @@
+image: alpine:latest
+
 include:
   - project: ifood/pipelines/gitlab-pipelines
     ref: ifood-backend-1-stable
     file: pipelines/ifood-backend/main.yml
 
+stages:
+  - rollback
+  - pipeline info
+  - compliance check
+  - test
+  - security publish report
+  - code analysis
+  - build
+  - review deploy
+  - stop review deploy
+  - stop deploy
+  - sandbox deploy
+  - canary start
+  - canary check
+  - deploy
+  - release
+  - canary on branch reject
+  - warmup hpa
+  - redeploy
+  - check hpa
+  - cooldown hpa
+  - conclude
+
 finish:
-  stage: cooldown hpa
+  stage: conclude
   image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
   variables: 
     REPOSITORY: batatinha-delivery/test-forks-pr
