@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: teste-oss-java
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  migration:
+    image: flyway/flyway:7.15.0
+    command: -community -url=jdbc:postgresql://postgres:5432/teste-oss-java -schemas=public -user=postgres -password=postgres -connectRetries=60 migrate
+    volumes:
+      - ./db-schema/migration/sql:/flyway/sql
+    depends_on:
+      - postgres

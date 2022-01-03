@@ -1,0 +1,30 @@
+apiVersion: ifood/v2
+kind: Repository
+tags:
+  - furnace-generated
+spec:
+  contents:
+   - name: teste-oss-java
+     ownerLayerSlug: stds
+     description: Teste de projeto OSS em Java
+     type: service
+     subType: 
+      - api
+     impactLevel: 5
+     deployment:
+        type: k8s_helm
+     certifications:
+        - name: IRC-MTDT
+          version: v1.1
+        - name: IRC-LOG
+          version: v1.1
+        - name: IRC-FAIL
+          version: v1.1
+        - name: IRC-DTB
+          version: v1.0
+#        - name: IRC-WATCH
+#          version: v1.0.0 TODO (REQUIRED production_management_page AND monitoring configurations)
+        - name: IRC-FTOGGLE
+          version: v1.0.0
+        - name: IRC-BAS
+          version: v1.0.0

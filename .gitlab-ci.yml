@@ -1,0 +1,16 @@
+include:
+  - project: ifood/pipelines/gitlab-pipelines
+    ref: ifood-backend-1-stable
+    file: pipelines/ifood-backend/main.yml
+
+unit-tests:
+  stage: test
+  image: maven:3.6.3-openjdk-17
+  script:
+    - mvn -Dmaven.repo.local=$BUILD_CACHE_PATH $MAVEN_CLI_OPTS verify
+  artifacts:
+    paths:
+      - "target"
+  cache:
+    paths:
+      - $BUILD_CACHE_PATH

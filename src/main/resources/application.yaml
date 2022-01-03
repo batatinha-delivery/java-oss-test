@@ -1,0 +1,87 @@
+server:
+  port: 8080
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health,info,prometheus,liveness,readiness,circuitbreakers,circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    probes:
+      enabled: true
+
+jdbc:
+  username: ${DB_USER:postgres}
+  password: ${DB_USER:postgres}
+  initSql: 'SELECT 1'
+  rw:
+    url: ${DB_RW_HOST:jdbc:postgresql://localhost:5432/teste-oss-java}
+    maxPoolSize: 5
+    maxLifetimeInMinutes: 10
+    leakDetectionThresholdInMilliseconds: 2000
+    connectionTimeoutInMilliseconds: 1000
+  ro:
+    url: ${DB_RO_HOST:jdbc:postgresql://localhost:5432/teste-oss-java}
+    maxPoolSize: 5
+    maxLifetimeInMinutes: 10
+    leakDetectionThresholdInMilliseconds: 2000
+    connectionTimeoutInMilliseconds: 1000
+  dr:
+    url: ${DB_DR_HOST:jdbc:postgresql://localhost:5432/teste-oss-java}
+    maxPoolSize: 5
+    maxLifetimeInMinutes: 10
+    leakDetectionThresholdInMilliseconds: 2000
+    connectionTimeoutInMilliseconds: 1000
+
+jooq:
+  queryTimeoutInSeconds: 10
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+  instances:
+    persistenceCircuitBreaker:
+      failureRateThreshold: 50
+      slowCallDurationThresholdMs: 10000
+      slidingWindowSize: 60
+      minimumNumberOfCalls: 100
+      slowCallRateThreshold: 100
+      slidingWindowType: COUNT_BASED
+      waitDurationInOpenStateMs: 60000
+      permittedNumberOfCallsInHalfOpenState: 10
+    readCircuitBreaker:
+      failureRateThreshold: 50
+      slowCallDurationThresholdMs: 10000
+      slidingWindowSize: 60
+      minimumNumberOfCalls: 100
+      slowCallRateThreshold: 100
+      slidingWindowType: COUNT_BASED
+      waitDurationInOpenStateMs: 60000
+      permittedNumberOfCallsInHalfOpenState: 10
+    fallbackCircuitBreaker:
+      failureRateThreshold: 50
+      slowCallDurationThresholdMs: 20000
+      slidingWindowSize: 60
+      minimumNumberOfCalls: 50
+      slowCallRateThreshold: 100
+      slidingWindowType: TIME_BASED
+      waitDurationInOpenStateMs: 5000
+      permittedNumberOfCallsInHalfOpenState: 10
+
+logging:
+  config: classpath:log4j2-prod.xml
+
+business:
+  audit:
+    sandbox: ${BUSINESS_AUDIT_SANDBOX:false}
+    production: ${BUSINESS_AUDIT_PRODUCTION:false}
+    disable: ${BUSINESS_AUDIT_DISABLE:false}
+    kafkaApiKey: ${BUSINESS_AUDIT_KAFKA_API_KEY}
+    KafkaApiSecret: ${BUSINESS_AUDIT_KAFKA_API_SECRET}
