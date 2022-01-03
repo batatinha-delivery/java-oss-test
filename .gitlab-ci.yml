@@ -3,7 +3,7 @@ include:
     ref: ifood-backend-1-stable
     file: pipelines/ifood-backend/main.yml
 
-test:
+finish:
   - stage: cooldown hpa
     image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
     variables: 
