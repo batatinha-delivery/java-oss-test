@@ -3,26 +3,27 @@ image: alpine:latest
 include:
   - project: ifood/pipelines/gitlab-pipelines
     ref: ifood-backend-1-stable
-    file: pipelines/ifood-backend/main.yml
+    file: common/templates/dependency_check.yml
+  - project: ifood/pipelines/gitlab-pipelines
+    ref: ifood-backend-1-stable
+    file: common/templates/snyk.yml
 
 stages:
-  - pipeline info
-  - compliance check
+  - .pre
   - test
   - security publish report
-  - code analysis
-  - build
+  - nowsecure
+  - security publish nowsecure report
   - conclude
 
-finish:
-  stage: conclude
-  image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
-  variables: 
-    REPOSITORY: batatinha-delivery/test-forks-pr
-    SHA: ${CI_COMMIT_SHA}
-  script:
-    - cd /src
-    - node check_success.js
+snyk_maven:
+  extends: .snyk
+  image: $CI_REGISTRY/ifood/security/app-security/snyk:maven-0.0.1
+
+dependency_check_generic:
+  extends: .dependency_check
+  variables:
+    DEPENDENCY_CHECK_REPORT_PATH: "dependency-check-generic.json"
 
 unit-tests:
   stage: test
@@ -35,3 +36,65 @@ unit-tests:
   cache:
     paths:
       - $BUILD_CACHE_PATH
+
+ifd_sast:
+  stage: security publish report
+  image:
+    name: $CI_REGISTRY/ifood/security/ifd-sast-cli:$IFD_SAST_CLI_VERSION
+    entrypoint: [""]
+  variables:
+    VAULT_SERVER_URL: "https://vault.dc.sec.ifood-prod.com.br"
+    VAULT_AUTH_PATH: $VAULT_AUTH_PATH_PRODUCTION
+    VAULT_AUTH_ROLE: $VAULT_AUTH_ROLE_APPSEC
+  secrets:
+    GITLAB_SAST_HOST_HEADER:
+      vault: appsec/ifd-sast-cli/gitlab-sast-host-header@gitlab
+    GITLAB_SAST_LAMBDA_ENDPOINT:
+      vault: appsec/ifd-sast-cli/gitlab-sast-lambda-endpoint@gitlab
+  before_script:
+    - echo "Execute this script to overwrite unexpected before_script sections."
+  script:
+    - export GITLAB_SAST_HOST_HEADER=$(cat $GITLAB_SAST_HOST_HEADER)
+    - export GITLAB_SAST_LAMBDA_ENDPOINT=$(cat $GITLAB_SAST_LAMBDA_ENDPOINT)
+    - python3 /ifd-sast-cli/src/ifd_sast_cli.py gitlab2ts \*-report.json
+    - python3 /ifd-sast-cli/src/ifd_sast_cli.py gitguardian2ts gitguardian_report.json
+    - |
+      if [ ! -f "snyk_report.json" ]; then
+        echo "parsing dependency check report..."
+        python3 /ifd-sast-cli/src/ifd_sast_cli.py dependency-check-merger dependency-check-\*
+        python3 /ifd-sast-cli/src/ifd_sast_cli.py dependencyCheck2ts dependency-check.json
+      fi
+    - |
+      if [ -f "snyk_report.json" ]; then
+        echo "parsing snyk report..."
+        python3 /ifd-sast-cli/src/ifd_sast_cli.py snyk2ts snyk_report.json
+      fi
+    - python3 /ifd-sast-cli/src/ifd_sast_cli.py decorator decorator
+  rules:
+    - when: on_success
+
+
+finish:
+  stage: conclude
+  image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
+  variables: 
+    REPOSITORY: batatinha-delivery/test-forks-pr
+    SHA: ${CI_COMMIT_SHA}
+  script:
+    - cd /src
+    - node check_success.js
+
+
+variables:
+  # Setting this variable will affect all Security templates
+  # (SAST, Dependency Scanning, ...)
+  SECURE_ANALYZERS_PREFIX: "registry.gitlab.com/gitlab-org/security-products/analyzers"
+  SAST_DEFAULT_ANALYZERS: "bandit, brakeman, gosec, spotbugs, flawfinder, phpcs-security-audit, security-code-scan, nodejs-scan, eslint, sobelow, pmd-apex, kubesec, gitleaks"
+  SAST_EXCLUDED_ANALYZERS: "eslint, semgrep, gitleaks, mobsf"
+  SAST_EXCLUDED_PATHS: "spec, test, tests, tmp"
+  SAST_ANALYZER_IMAGE_TAG: 2
+  SCAN_KUBERNETES_MANIFESTS: "false"
+  SECURE_LOG_LEVEL: "debug"
+  IFD_SAST_CLI_VERSION: $IFD_SAST_CLI_VERSION
+  VAULT_AUTH_PATH_PRODUCTION: "code_ifoodcorp_jwt"
+  VAULT_AUTH_ROLE_APPSEC: "read-gitlab-appsec"
