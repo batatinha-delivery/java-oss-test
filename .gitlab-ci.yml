@@ -78,7 +78,7 @@ finish:
   stage: conclude
   image: registry.infra.ifood-prod.com.br/ifood/platform-engineering/oss/github-check-updater:latest 
   variables: 
-    REPOSITORY: batatinha-delivery/test-forks-pr
+    REPOSITORY: batatinha-delivery/java-oss-test
     SHA: ${CI_COMMIT_SHA}
   script:
     - cd /src
