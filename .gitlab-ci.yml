@@ -98,3 +98,4 @@ variables:
   IFD_SAST_CLI_VERSION: $IFD_SAST_CLI_VERSION
   VAULT_AUTH_PATH_PRODUCTION: "code_ifoodcorp_jwt"
   VAULT_AUTH_ROLE_APPSEC: "read-gitlab-appsec"
+  RUN_SNYK: "true"
