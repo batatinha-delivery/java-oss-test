@@ -1,17 +1,17 @@
-package ifood.teste-oss-java.sample.service;
+package ifood.teste.sample.service;
 
 import com.ifood.audit.interfaces.AuditHeaders;
 import com.ifood.audit.interfaces.BusinessAuditPayload;
 import com.ifood.audit.interfaces.BusinessAuditProducer;
 import com.ifood.featureflags.interfaces.FeatureFlagsResolver;
-import ifood.teste-oss-java.audit.AuditService;
-import ifood.teste-oss-java.audit.AuditUseCase;
-import ifood.teste-oss-java.commons.context.HttpRequestContext;
-import ifood.teste-oss-java.fallback.service.FallbackService;
-import ifood.teste-oss-java.featureflags.FeatureFlag;
-import ifood.teste-oss-java.sample.model.Sample;
-import ifood.teste-oss-java.sample.repository.SampleReadRepository;
-import ifood.teste-oss-java.sample.repository.SampleWriteRepository;
+import ifood.teste.audit.AuditService;
+import ifood.teste.audit.AuditUseCase;
+import ifood.teste.commons.context.HttpRequestContext;
+import ifood.teste.fallback.service.FallbackService;
+import ifood.teste.featureflags.FeatureFlag;
+import ifood.teste.sample.model.Sample;
+import ifood.teste.sample.repository.SampleReadRepository;
+import ifood.teste.sample.repository.SampleWriteRepository;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
