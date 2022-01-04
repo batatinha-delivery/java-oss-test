@@ -1,11 +1,11 @@
 package ifood.teste.sample.controller;
 
-import ifood.teste-oss-java.commons.context.RequestContext;
-import ifood.teste-oss-java.commons.context.RequestContextBuilder;
-import ifood.teste-oss-java.commons.log.ContextLogger;
-import ifood.teste-oss-java.commons.log.ContextLoggerFactory;
-import ifood.teste-oss-java.sample.model.Sample;
-import ifood.teste-oss-java.sample.service.SampleService;
+import ifood.teste.commons.context.RequestContext;
+import ifood.teste.commons.context.RequestContextBuilder;
+import ifood.teste.commons.log.ContextLogger;
+import ifood.teste.commons.log.ContextLoggerFactory;
+import ifood.teste.sample.model.Sample;
+import ifood.teste.sample.service.SampleService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

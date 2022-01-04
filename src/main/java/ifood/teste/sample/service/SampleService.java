@@ -1,15 +1,15 @@
 package ifood.teste.sample.service;
 
 import com.ifood.featureflags.interfaces.FeatureFlagsResolver;
-import ifood.teste-oss-java.audit.AuditService;
-import ifood.teste-oss-java.commons.context.RequestContext;
-import ifood.teste-oss-java.commons.log.ContextLogger;
-import ifood.teste-oss-java.commons.log.ContextLoggerFactory;
-import ifood.teste-oss-java.fallback.service.FallbackService;
-import ifood.teste-oss-java.featureflags.FeatureFlag;
-import ifood.teste-oss-java.sample.model.Sample;
-import ifood.teste-oss-java.sample.repository.SampleReadRepository;
-import ifood.teste-oss-java.sample.repository.SampleWriteRepository;
+import ifood.teste.audit.AuditService;
+import ifood.teste.commons.context.RequestContext;
+import ifood.teste.commons.log.ContextLogger;
+import ifood.teste.commons.log.ContextLoggerFactory;
+import ifood.teste.fallback.service.FallbackService;
+import ifood.teste.featureflags.FeatureFlag;
+import ifood.teste.sample.model.Sample;
+import ifood.teste.sample.repository.SampleReadRepository;
+import ifood.teste.sample.repository.SampleWriteRepository;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.vavr.control.Try;
 import org.springframework.beans.factory.annotation.Qualifier;

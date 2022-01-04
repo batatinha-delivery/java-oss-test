@@ -1,8 +1,8 @@
 package ifood.teste.fallback.publisher;
 
-import ifood.teste-oss-java.commons.log.ContextLogger;
-import ifood.teste-oss-java.commons.log.ContextLoggerFactory;
-import ifood.teste-oss-java.fallback.model.FallbackResult;
+import ifood.teste.commons.log.ContextLogger;
+import ifood.teste.commons.log.ContextLoggerFactory;
+import ifood.teste.fallback.model.FallbackResult;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

@@ -1,7 +1,7 @@
 package ifood.teste.commons.log;
 
-import ifood.teste-oss-java.commons.context.EmptyContext;
-import ifood.teste-oss-java.commons.context.RequestContext;
+import ifood.teste.commons.context.EmptyContext;
+import ifood.teste.commons.context.RequestContext;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

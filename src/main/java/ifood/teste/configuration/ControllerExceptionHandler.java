@@ -1,7 +1,7 @@
 package ifood.teste.configuration;
 
-import ifood.teste-oss-java.commons.log.ContextLogger;
-import ifood.teste-oss-java.commons.log.ContextLoggerFactory;
+import ifood.teste.commons.log.ContextLogger;
+import ifood.teste.commons.log.ContextLoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
