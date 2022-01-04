@@ -1,4 +1,4 @@
-package ifood.teste-oss-java.sample.model;
+package ifood.teste.sample.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

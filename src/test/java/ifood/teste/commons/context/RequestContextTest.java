@@ -1,7 +1,7 @@
-package ifood.teste-oss-java.commons.context;
+package ifood.teste.commons.context;
 
 import com.ifood.audit.interfaces.AuditHeaders;
-import ifood.teste-oss-java.commons.context.HttpRequestContext.IFoodHeaders;
+import ifood.teste.commons.context.HttpRequestContext.IFoodHeaders;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;

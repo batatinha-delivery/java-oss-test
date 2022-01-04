@@ -1,7 +1,7 @@
 package ifood.teste.fallback.service;
 
-import ifood.teste-oss-java.fallback.model.FallbackResult;
-import ifood.teste-oss-java.fallback.publisher.FallbackHandler;
+import ifood.teste.fallback.model.FallbackResult;
+import ifood.teste.fallback.publisher.FallbackHandler;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.vavr.control.Try;
 import org.slf4j.Logger;

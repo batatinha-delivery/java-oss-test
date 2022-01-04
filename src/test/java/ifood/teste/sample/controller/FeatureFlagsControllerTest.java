@@ -1,4 +1,4 @@
-package ifood.teste-oss-java.sample.controller;
+package ifood.teste.sample.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,12 @@
-package ifood.teste-oss-java.sample.controller;
+package ifood.teste.sample.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ifood.audit.interfaces.AuditHeaders;
-import ifood.teste-oss-java.commons.context.RequestContext;
-import ifood.teste-oss-java.configuration.ControllerExceptionHandler;
-import ifood.teste-oss-java.sample.model.Sample;
-import ifood.teste-oss-java.sample.service.SampleService;
+import ifood.teste.commons.context.RequestContext;
+import ifood.teste.configuration.ControllerExceptionHandler;
+import ifood.teste.sample.controller.SampleController;
+import ifood.teste.sample.model.Sample;
+import ifood.teste.sample.service.SampleService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

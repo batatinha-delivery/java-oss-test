@@ -4,9 +4,9 @@ import com.ifood.audit.interfaces.AuditHeaders;
 import com.ifood.audit.interfaces.BusinessAuditPayload;
 import com.ifood.audit.interfaces.BusinessAuditProducer;
 import com.ifood.audit.interfaces.InvalidStateException;
-import ifood.teste-oss-java.exceptions.InvalidAuditDataException;
-import ifood.teste-oss-java.sample.model.Sample;
-import ifood.teste-oss-java.auth.Auth;
+import ifood.teste.exceptions.InvalidAuditDataException;
+import ifood.teste.sample.model.Sample;
+import ifood.teste.auth.Auth;
 import org.springframework.stereotype.Component;
 
 // create your own auditService to centralize call on business audit sdk and publish your audit model
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class AuditService {
 
     private static final String TRIBE = "your-tribe";
-    private static final String SERVICE_NAME = "teste-oss-java";
+    private static final String SERVICE_NAME = "teste";
     private static final String DOMAIN = "sample";
 
     private final BusinessAuditProducer businessAuditProducer;

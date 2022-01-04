@@ -1,7 +1,7 @@
 package ifood.teste.commons.context;
 
 import com.ifood.audit.interfaces.AuditHeaders;
-import ifood.teste-oss-java.commons.log.ContextLog;
+import ifood.teste.commons.log.ContextLog;
 
 import java.util.Map;
 

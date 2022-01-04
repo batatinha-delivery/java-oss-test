@@ -1,7 +1,7 @@
 package ifood.teste.sample.controller;
 
 import com.ifood.featureflags.interfaces.FeatureFlagsResolver;
-import ifood.teste-oss-java.featureflags.FeatureFlag;
+import ifood.teste.featureflags.FeatureFlag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
