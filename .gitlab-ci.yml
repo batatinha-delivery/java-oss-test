@@ -82,7 +82,7 @@ finish:
     SHA: ${CI_COMMIT_SHA}
   script:
     - cd /src
-    - node check_success.js
+    - node check_complete.js
 
 
 variables:
