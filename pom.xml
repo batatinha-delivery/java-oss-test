@@ -28,7 +28,7 @@
         <newrelic-api.version>7.1.1</newrelic-api.version>
         <disruptor.version>3.4.4</disruptor.version>
         <resilience4j-spring-boot2.version>1.7.1</resilience4j-spring-boot2.version>
-        <postgresql.version>42.3.1</postgresql.version>
+        <postgresql.version>42.3.8</postgresql.version>
         <log4j2.version>2.17.0</log4j2.version>
     </properties>
 
